@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+</style>
+</head>
+
+<script type="text/javascript">
+    function GetSelected() {
+        //Reference the Table.
+        var grid = document.getElementById("Table1");
+ 
+        //Reference the CheckBoxes in Table.
+        var checkBoxes = grid.getElementsByTagName("INPUT");
+        var message = "Id Name                  Country\n";
+        var v = new Array()
+        //Loop through the CheckBoxes.
+        for (var i = 0; i < checkBoxes.length; i++) {
+            if (checkBoxes[i].checked) {
+                var row = checkBoxes[i].parentNode.parentNode;
+                message += row.cells[1].innerHTML;
+                message += "   " + row.cells[2].innerHTML;
+                message += "   " + row.cells[3].innerHTML;
+                message += "\n";
+                // v[0] = row.cells[1].innerHTML;
+                // v[1] = row.cells[2].innerHTML;
+                // v[2] = row.cells[3].innerHTML;
+                // v[3] = row.cells[4].innerHTML;
+                // v[4] = row.cells[5].innerHTML;
+                v = row.cells[8].innerHTML
+            }
+        }
+ 
+        //Display selected Row data in Alert Box.
+        console.log(v);
+        document.getElementById('id').value = v;
+        document.getElementById("myForm").submit();
+    }
+</script>
+
+<body>  
+    <table style="width:100%" id = "Table1">
+        <tr>
+            <th> select</th>
+            <th>original_url</th>
+            <th>fulltitle</th>
+            <th>channel</th>
+            <th>duration_string</th>
+            <th>channel_follower_count</th>
+            <th>like_count</th>
+            <th>comment_count</th>
+            <th>ID</th>
+            <th>view count</th>
+            <th>Uploader</th>
+        </tr>
+        
+            {% for line in metadata %}
+            <tr>
+                        <td> <input type="checkbox" name="foo" value="bar1"> <br/> </td>
+                    {% for cell in line %}
+                        <td>{{ cell }}</td>
+                    {% endfor %}   
+            </tr>       
+            {% endfor %}
+    </table>
+
+    <form name="myform" method="post" action="video_details.html">
+        <input id="id" name="id" type="hidden" />
+        <input style="width: 300px" type="submit" value="search" onclick="GetSelected()"/>
+    </form>
+
+</body>
+</html>
