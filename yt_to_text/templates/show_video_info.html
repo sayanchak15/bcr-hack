@@ -2,6 +2,7 @@
 <html>
 <head>
 <style>
+    
     table, th, td {
       border: 1px solid black;
       border-collapse: collapse;
@@ -54,23 +55,26 @@
             <th>like_count</th>
             <th>comment_count</th>
             <th>ID</th>
-            <th>view count</th>
+            <th>view_count</th>
             <th>Uploader</th>
+            <th>upload date</th>
+            <th>language</th>
         </tr>
         
             {% for line in metadata %}
             <tr>
                         <td> <input type="checkbox" name="foo" value="bar1"> <br/> </td>
-                    {% for cell in line %}
+                    {% for cell in line %} 
+                    {{loop.index}}
                         <td>{{ cell }}</td>
                     {% endfor %}   
             </tr>       
             {% endfor %}
     </table>
-
+    <br><br>
     <form name="myform" method="post" action="video_details.html">
         <input id="id" name="id" type="hidden" />
-        <input style="width: 300px" type="submit" value="search" onclick="GetSelected()"/>
+        <input style="width: 300px" type="submit" value="Analyze" onclick="GetSelected()"/>
     </form>
 
 </body>

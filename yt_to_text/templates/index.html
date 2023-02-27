@@ -1,20 +1,57 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Global Computer Problems and Solutions</title>
+</head>
 <body>
+<div id="header">
+    <h1>BCR Technology Hackathon</h1>
+</div>
+<div class="container">
+<h1>Youtube Search</h1>
 
-<h2>Youtube search by keywords</h2>
+<form action="show_video_info.html" method="POST">
+  <div class="input-group">
+  <table>
+    <tr>
+    <td><label for="kw"> Enter the keyword you want to search : </label></td>
+     <td><input id="kw" type="text" name="kw" value="" /></td> 
+    </tr>
+    <tr>
+    <td>  <label for="vc">Enter the min view count: &nbsp;</label> </td>
+     <td> <input id="vc" type="text" name="vc" value="" /></td>
+    </tr>
+  </table>
+    <button type="submit" value="Submit">Search</button>
+    </div>
+</form>
+<br><br>
+<br><br>
 
-<form action="show_video_info.html" method="post">
-    <label for="team_name">Enter the keyword you want to search : </label>
-    <input id="kw" type="text" name="var[]" value="" />
-    <br><br>
-    <label for="team_name">Enter the min view count: </label>
-      <input id="vc" type="text" name="var[]" value="" />
 
-    <br><br>
-    <input type="submit" value="Submit" />
-  </form>
+<form action="show_video_info.html" method="POST">
+  <div class="input-group">
+    <table>
+      <tr>
+        <td>
+          <label for="team_name">Enter the youtube link: </label>
+        </td>
+        <td>
+          <input id="url" type="text" name="url" value="" />
+        </td>
+      </tr>
+      </table>
+  <button type="submit" value="Submit" > Search </button>
+  </div>
+</form>
+</div>
 
 
+
+<div id="footer">
+  <p>&copy; 2023 Global Computer Problems and Solutions</p>
+</div>
 </body>
 </html>

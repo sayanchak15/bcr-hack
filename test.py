@@ -1,38 +1,21 @@
+from google.cloud import storage
 
+def upload_to_bucket(blob_name, path_to_file, bucket_name):
+    """ Upload data to a bucket"""
+     
+    # Explicitly use service account credentials by specifying the private key
+    # file.
+    # storage_client = storage.Client.from_service_account_json('creds.json')
+    storage_client = storage.Client(project="bcr-technology-hackathon")
+    bucket = storage_client.get_bucket(bucket_name)
+    blob = bucket.blob(blob_name)
+    blob.upload_from_filename(path_to_file)
+    
+    #returns a public url
+    return blob.public_url
 
-from google.cloud import language_v1
-import six
-
-import google.auth
-
-credentials, project = google.auth.default()
-
-from google.oauth2 import service_account
-
-credentials = service_account.Credentials.from_service_account_file(
-    '/Users/AIUDD75/Downloads/bcr-technology-hackathon-47cf62696e22.json')
-
-scoped_credentials = credentials.with_scopes(
-    ['https://www.googleapis.com/auth/cloud-platform'])
-
-
-def sample_analyze_sentiment(content):
-
-    client = language_v1.LanguageServiceClient()
-
-    # content = 'Your text to analyze, e.g. Hello, world!'
-
-    if isinstance(content, six.binary_type):
-        content = content.decode("utf-8")
-
-    type_ = language_v1.Document.Type.PLAIN_TEXT
-    document = {"type_": type_, "content": content}
-
-    response = client.analyze_sentiment(request={"document": document})
-    sentiment = response.document_sentiment
-    print("Score: {}".format(sentiment.score))
-    print("Magnitude: {}".format(sentiment.magnitude))
-
-    return sentiment.score, sentiment.magnitude
-
-print(sample_analyze_sentiment("I'm very happy"))
+vid = 'XZeL3n-7Yvg'
+bucket_name = 'erpv1'
+blob_name = f'videos/{vid}/{vid}.mp4'
+path_to_file = "videos/XZeL3n-7Yvg.mp4"
+upload_to_bucket(blob_name, path_to_file, bucket_name)

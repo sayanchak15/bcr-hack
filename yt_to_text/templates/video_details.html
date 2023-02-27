@@ -1,5 +1,10 @@
 
-
+<style>
+       table, th, td {
+         border: 1px solid black;
+         border-collapse: collapse;
+       }
+</style>
 <label for="all">Complete Text</label>
 <textarea id="complete" name="complete" rows="20" cols="150">{{full_speech}}</textarea>
 
@@ -11,3 +16,21 @@
 <br><br><br><br>
 <label for="all">Overall Sentiment</label>
 <text id="senti" name="senti" >{{senti}}</text> With a Magnitude of {{mag}}
+
+<h2 class="text-center"><u>KeyWORD SCORES </u></h2><br>   
+Overall Score is: <text id="os" name="os" >{{oscore}}</text>
+       <table style="width:100%" id = "Table1">
+           <tr>
+             <th>KeyWords</th>
+             <th>Text</th>
+             <th>Mean Score</th>
+           </tr>
+         <!-- jinja2 Technique -->
+         {% for i in kdf %}
+           <tr>
+             <td>{{i.key_words}}</td>
+             <td>{{i.texts}}</td>
+             <td>{{i.score}}</td>
+           </tr>
+         {% endfor %}
+       </table>
